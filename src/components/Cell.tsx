@@ -45,7 +45,6 @@ export function Cell({ ticket, index }: Props) {
 
   return (
     <div
-      //className="mx-4 flex flex-row border-t border-b border-zinc-700 w-72 p-1 text-gray-200 bg-zinc-800"
       className="mx-4 flex flex-row border-t border-b border-zinc-300 w-72 p-1 text-gray-800 bg-white opacity-90 h-9 truncate"
       onClick={() => setEditable(true)}
     >
