@@ -44,7 +44,7 @@ export default function SignUp() {
     <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-screen flex justify-center items-center">
       <form
         onSubmit={submit}
-        className="bg-white h-3/4 w-1/4 rounded-lg flex flex-col items-center"
+        className="bg-white w-1/4 rounded-lg flex flex-col items-center"
       >
         <p className="font-semibold text-2xl my-12 text-zinc-700">Sign up</p>
 

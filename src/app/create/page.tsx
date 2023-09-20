@@ -29,9 +29,9 @@ export default function Create() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-screen ">
+    <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-full">
       <nav className="flex justify-end">
-        <p className="text-right cursor-pointer mx-8 mt-8 w-auto">
+        <p className="text-right cursor-pointer mx-8 mt-8 w-auto" onClick={() => {router.push("/")}}>
           👤 My account
         </p>
       </nav>
@@ -177,7 +177,7 @@ export default function Create() {
 
         <div className="mt-2 flex justify-center flex-col items-center border-black border-0 text-zinc-700">
           <input
-            className="text-sm flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg w-48 p-2 rounded-lg bg-white hover:bg-gradient-to-r from-sky-300 hover:to-sky-100 cursor-pointer"
+            className="text-sm mb-10 flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg w-48 p-2 rounded-lg bg-white hover:bg-gradient-to-r from-sky-300 hover:to-sky-100 cursor-pointer"
             type="submit"
             value="Submit"
           ></input>

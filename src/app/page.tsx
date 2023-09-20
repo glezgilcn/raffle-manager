@@ -1,9 +1,11 @@
 "use client";
 
 import { RaffleCard } from "@/components/RaffleCard";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function Dashboard() {
+  const router = useRouter();
   const [raffles, setRaffles] = useState<Array<Raffle>>([]);
 
   useEffect(() => {
@@ -19,9 +21,9 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-full pb-32 text-zinc-700">
+    <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-full min-h-screen pb-32 text-zinc-700">
       <nav className="flex justify-end">
-        <p className="text-right cursor-pointer mx-8 mt-8 w-auto">
+        <p className="text-right cursor-pointer mx-8 mt-8 w-auto" onClick={() => {router.push("/create")}}>
           ➕ Create a<br />
           new raffle
         </p>
