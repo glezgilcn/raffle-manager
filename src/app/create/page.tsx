@@ -1,33 +1,72 @@
 "use client";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
 
 export default function Create() {
+  const router = useRouter();
   const [radioSelected, setRadioSelected] = useState("dots");
+
+  const submit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const response = await fetch("/api/raffles", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        title: event.currentTarget.raffleTitle.value,
+        description: event.currentTarget.description.value,
+        tickets: parseInt(event.currentTarget.tickets.value, 10),
+        theme: radioSelected,
+      }),
+    });
+
+    if (response.ok) {
+      router.push("/");
+      return;
+    }
+    alert("There was an error");
+  };
+
   return (
     <div className="bg-gradient-to-r from-indigo-200 via-red-200 to-yellow-100 h-screen ">
       <nav className="flex justify-end">
         <p className="text-right cursor-pointer mx-8 mt-8 w-auto">
-        👤 My account
+          👤 My account
         </p>
       </nav>
-      
-      <form className="flex flex-col justify-center items-center" action="">
+
+      <form
+        className="flex flex-col justify-center items-center"
+        onSubmit={submit}
+      >
         <div className="flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg">
-        <p className="font-semibold text-2xl mb-10">Create a raffle</p>
-          <label>Raffle's title</label> <br />
-          <input className="rounded-lg w-48 pl-2 max-h-72 overflow-y-scroll	" />
+          <p className="font-semibold text-2xl mb-10">Create a raffle</p>
+          <label>Raffle&apos;s title</label> <br />
+          <input
+            className="rounded-lg w-48 pl-2 max-h-72 overflow-y-scroll"
+            name="raffleTitle"
+          />
           <br />
         </div>
 
         <div className="flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg">
-          <label>Raffle's description</label> <br />
-          <textarea className="rounded-lg w-48 pl-2 max-h-72 overflow-y-scroll	" />
+          <label>Raffle&apos;s description</label> <br />
+          <textarea
+            className="rounded-lg w-48 pl-2 max-h-72 overflow-y-scroll"
+            name="description"
+          />
           <br />
         </div>
 
         <div className="flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg">
           <label>Number of tickets</label> <br />
-          <input type="number" className="rounded-lg w-48 pl-2" /> <br />
+          <input
+            type="number"
+            className="rounded-lg w-48 pl-2"
+            name="tickets"
+          />{" "}
+          <br />
         </div>
 
         <div className="flex justify-center flex-col items-center border-black border-0 text-zinc-700 text-lg">

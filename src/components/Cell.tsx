@@ -4,41 +4,52 @@ import { useState } from "react";
 type Props = {
   index: number;
   ticket: Buyer | null;
+  updateTicket: (
+    index: number,
+    data: { name: string; telephone: string }
+  ) => void;
 };
 
-export function Cell({ ticket, index }: Props) {
+export function Cell({ ticket, index, updateTicket }: Props) {
   const [editable, setEditable] = useState<boolean>(false);
-  const [name, setName] = useState<string>(ticket?.name ?? '');
-  const [telephone, setTelephone] = useState<string>(ticket?.telephone ?? '');
+  const [name, setName] = useState<string>(ticket?.name ?? "");
+  const [telephone, setTelephone] = useState<string>(ticket?.telephone ?? "");
 
   const submit = () => {
-    //subir al backend
+    if (!name || !telephone) {
+      alert("Phone and name are mandatory");
+      return;
+    }
+    updateTicket(index, { name, telephone });
     setEditable(false);
   };
 
   if (editable) {
     return (
       <div className="mx-4 border-t border-b border-zinc-300 w-72 p-1 text-gray-800 bg-white opacity-90">
-        <input 
-        className="w-full text-gray-800 bg-white"
+        <input
+          className="w-full text-gray-800 bg-white"
           placeholder="Name"
           type="text"
           value={name}
           onChange={(event) => setName(event.target.value)}
         />
         <input
-        className="w-full text-gray-800 bg-white"
+          className="w-full text-gray-800 bg-white"
           placeholder="Telephone"
           type="text"
           value={telephone}
           onChange={(event) => setTelephone(event.target.value)}
         />
-        <button 
-        className="w-6/12 text-gray-800 bg-white"
-        onClick={() => setEditable(false)}>Cancel</button>
-        <button 
-        className="w-6/12 text-gray-800 bg-white"
-        onClick={submit}>Submit</button>
+        <button
+          className="w-6/12 text-gray-800 bg-white"
+          onClick={() => setEditable(false)}
+        >
+          Cancel
+        </button>
+        <button className="w-6/12 text-gray-800 bg-white" onClick={submit}>
+          Submit
+        </button>
       </div>
     );
   }
